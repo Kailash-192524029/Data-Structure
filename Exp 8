@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+int findMissingPositive(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        while (arr[i] > 0 && arr[i] <= n && arr[arr[i]-1] != arr[i]) {
+            int temp = arr[arr[i]-1];
+            arr[arr[i]-1] = arr[i];
+            arr[i] = temp;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] != i + 1)
+            return i + 1;
+    }
+
+    return n + 1;
+}
+
+int main() {
+    int arr1[] = {2, 3, 7, 6, 8, -1, -10, 15};
+    int n1 = 8;
+    printf("%d\n", findMissingPositive(arr1, n1));
+
+    int arr2[] = {2, 3, -7, 6, 8, 1, -10, 15};
+    int n2 = 8;
+    printf("%d\n", findMissingPositive(arr2, n2));
+
+    int arr3[] = {1, 1, 0, -1, -2};
+    int n3 = 5;
+    printf("%d\n", findMissingPositive(arr3, n3));
+
+    return 0;
+}
